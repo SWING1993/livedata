@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 import scrapy
 
-
-class DouyuSpider(scrapy.Spider):
-    name = 'douyu'
-    allowed_domains = ['www.douyu.com']
-    start_urls = ['http://www.douyu.com/']
+class DmozSpider(scrapy.Spider):
+    name = "douyu"
+    allowed_domains = ["douyu.org"]
+    start_urls = [
+        "https://www.douyu.com/directory",
+    ]
 
     def parse(self, response):
-        pass
+        filename = response.url.split("/")[-2]
+        with open(filename, 'wb') as f:
+            f.write(response.body)
